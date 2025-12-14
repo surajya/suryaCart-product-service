@@ -66,12 +66,12 @@ public class ProductOperationServlet extends HttpServlet {
 				Category category = cd.getCategoryById(cid);
 
 				Product p = new Product();
-				p.setpTitle(title);
-				p.setpDesc(dis);
-				p.setpPrice(price);
-				p.setpDiscount(discount);
-				p.setpQuantity(quantity);
-				p.setpPhoto(part.getSubmittedFileName());
+				p.setPTitle(title);
+				p.setPDesc(dis);
+				p.setPPrice(price);
+				p.setPDiscount(discount);
+				p.setPQuantity(quantity);
+				p.setPPhoto(part.getSubmittedFileName());
 				p.setCategory(category);
 
 				ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
