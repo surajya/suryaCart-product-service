@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="message">
+
+<div th:if="${session.message}"
+     class="alert alert-success"
+     role="alert"
+     th:text="${session.message}">
+</div>
+
+</body>
+</html>
