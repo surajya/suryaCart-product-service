@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.suryacart.product.model.Product;
@@ -22,7 +23,7 @@ public class HomeController {
 		this.productRepository = productRepository;
 	}
 
-	@GetMapping("/")
+	@GetMapping("/home")
 	public String home(@RequestParam(value = "category", required = false) Integer categoryId, Model model) {
 
 		model.addAttribute("categories", categoryRepository.findAll());
@@ -31,10 +32,22 @@ public class HomeController {
 		if (categoryId == null) {
 			products = productRepository.findAll();
 		} else {
-			products = productRepository.findByCategoryId(categoryId);
+			products = productRepository.findByCategory_CategoryId(categoryId);
 		}
 
 		model.addAttribute("products", products);
-		return "index";
+		return "home";
+	}
+
+	@GetMapping("/login")
+	public String login() {
+
+		return "login";
+	}
+
+	@PostMapping("/login")
+	public String doLogin() {
+
+		return "addProduct";
 	}
 }

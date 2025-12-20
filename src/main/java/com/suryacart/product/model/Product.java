@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -19,9 +20,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "products")
 @Data
 @Builder
-@Table(name = "products")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Product {
@@ -42,9 +43,9 @@ public class Product {
 	@Column(nullable = false)
 	private Integer stock;
 
-	@Column(nullable = false)
-	@ManyToOne
-	private String category;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "category_id", nullable = true)
+	private Category category;
 
 	@Column(nullable = false)
 	private Boolean active = true;
@@ -62,5 +63,4 @@ public class Product {
 	void onUpdate() {
 		this.updatedAt = LocalDateTime.now();
 	}
-
 }

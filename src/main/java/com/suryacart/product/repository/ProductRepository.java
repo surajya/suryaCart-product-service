@@ -12,6 +12,6 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 	public List<Product> findByActiveTrue();
 
 	// Custom query method to find products by category ID
-	public List<Product> findByCategoryId(int categoryId);
+	List<Product> findByCategory_CategoryId(Integer categoryId);
 
 }
