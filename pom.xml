@@ -13,11 +13,11 @@
 	</parent>
 
 	<groupId>com.mvc.ecom</groupId>
-	<artifactId>surya-cart-add-product</artifactId>
+	<artifactId>suryaCart-product-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>surya-cart-add-product-platform</name>
+	<name>suryaCart-product-service</name>
 	<description>Spring Boot e-commerce add product module</description>
 
 	<!-- Java Version -->
