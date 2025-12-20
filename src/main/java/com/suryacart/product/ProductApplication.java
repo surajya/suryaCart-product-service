@@ -1,14 +1,13 @@
-package mvc.ecom;
+package com.suryacart.product;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class AddProduct {
 
+@SpringBootApplication
+public class ProductApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(AddProduct.class, args);
+		SpringApplication.run(ProductApplication.class, args);
 		System.out.println("Add-Product Application started.............");
 	}
-
 }

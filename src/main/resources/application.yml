@@ -1,0 +1,14 @@
+#file.upload-dir=uploads/products
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/suryacart_product
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
