@@ -13,6 +13,7 @@ import com.suryacart.product.dto.ProductResponseDto;
 import com.suryacart.product.exception.ProductNotFoundException;
 import com.suryacart.product.model.Product;
 import com.suryacart.product.repository.ProductRepository;
+import com.suryacart.product.service.CategoryService;
 import com.suryacart.product.service.ProductService;
 
 @Service
@@ -21,8 +22,11 @@ public class ProductServiceImpl implements ProductService {
 
 	private final ProductRepository productRepository;
 
-	public ProductServiceImpl(ProductRepository productRepository) {
+	private final CategoryService categoryService;
+
+	public ProductServiceImpl(ProductRepository productRepository, CategoryService categoryService) {
 		this.productRepository = productRepository;
+		this.categoryService = categoryService;
 	}
 
 	@Override
@@ -83,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
 		product.setDescription(request.getDescription());
 		product.setPrice(request.getPrice());
 		product.setStock(request.getStock());
-		// product.setCategory(request.getCategory());
+		product.setCategory(categoryService.findById(request.getCategoryId()));
 		product.setActive(true);
 	}
 
@@ -94,7 +98,7 @@ public class ProductServiceImpl implements ProductService {
 		dto.setDescription(product.getDescription());
 		dto.setPrice(product.getPrice());
 		dto.setStock(product.getStock());
-		// dto.setCategory(product.getCategory());
+		dto.setCategory(product.getCategory().getCategoryTitle());
 		dto.setActive(product.getActive());
 		dto.setCreatedAt(product.getCreatedAt());
 		dto.setUpdatedAt(product.getUpdatedAt());

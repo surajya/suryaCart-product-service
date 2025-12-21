@@ -9,14 +9,14 @@ import lombok.Data;
 @Data
 public class ProductResponseDto {
 
-    private UUID id;
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private Integer stock;
-    private String category;
-    private Boolean active;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+	private UUID id;
+	private String name;
+	private String description;
+	private BigDecimal price;
+	private Integer stock;
+	private String category;
+	private Boolean active;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 
 }

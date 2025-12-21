@@ -2,6 +2,8 @@ package com.suryacart.product.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,12 +26,13 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer categoryId;
+	private Long categoryId;
 
 	private String categoryTitle;
 
 	private String categoryDescription;
 
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Product> products;
 }
