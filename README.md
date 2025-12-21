@@ -1,3 +1,7 @@
+Remember that I want to update README whenever I add new features to SuryaCart.
+
+
+
 # 🛒 SuryaCart – Product Service
 
 The **SuryaCart Product Service** is a core microservice of the SuryaCart e-commerce platform.  
