@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Category</title>
+</head>
+<body>
+
+<h2>Edit Category</h2>
+
+<form id="editForm">
+  <input id="name" /><br><br>
+  <button>Update</button>
+</form>
+
+<script>
+const id = new URLSearchParams(window.location.search).get("id");
+
+// load category
+fetch(`/api/categories/${id}`)
+  .then(res => res.json())
+  .then(c => name.value = c.name);
+
+// update category
+document.getElementById("editForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  fetch(`/api/categories/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: name.value })
+  }).then(() => {
+    window.location.href = "index.html";
+  });
+});
+</script>
+
+</body>
+</html>

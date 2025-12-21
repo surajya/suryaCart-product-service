@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Product</title>
+</head>
+<body>
+
+<h2>Edit Product</h2>
+
+<form id="editForm">
+  <input id="name" /><br>
+  <input id="price" type="number" /><br>
+  <input id="stock" type="number" /><br>
+  <input id="active" /><br>
+
+  <select id="category"></select><br><br>
+
+  <button>Update</button>
+</form>
+
+<script>
+const id = new URLSearchParams(window.location.search).get("id");
+
+// 1️⃣ Load categories first
+fetch("/api/categories")
+  .then(res => res.json())
+  .then(categories => {
+    const select = document.getElementById("category");
+    categories.forEach(c => {
+      select.innerHTML += `<option value="${c.categoryId}">${c.categoryTitle}</option>`;
+    });
+
+    // 2️⃣ Load product after categories
+    return fetch(`/api/products/${id}`);
+  })
+  .then(res => res.json())
+  .then(p => {
+    name.value = p.name;
+    price.value = p.price;
+    category.value = p.category_id; // 🔥 preselect
+  });
+
+// update product
+document.getElementById("editForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  fetch(`/api/products/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: name.value,
+      price: price.value,
+      categoryId: category.value
+    })
+  }).then(() => {
+    window.location.href = "index.html";
+  });
+});
+</script>
+
+</body>
+</html>

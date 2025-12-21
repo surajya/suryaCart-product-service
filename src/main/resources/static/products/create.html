@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Product</title>
+</head>
+<body>
+
+<h2>Add Product</h2>
+
+<form id="productForm">
+  <input id="name" placeholder="Product Name" /><br>
+  <input id="price" type="number" placeholder="Price" /><br>
+  <input id="stock" type="number" placeholder="stock" /><br>
+  <input id="description" placeholder="description" /><br>
+  
+  <label for="category">Category:</label>
+  <select id="category"></select><br><br>
+
+  <button type="submit">Save</button>
+</form>
+
+<script>
+// load categories
+fetch("/api/categories")
+  .then(res => res.json())
+  .then(categories => {
+    const select = document.getElementById("category");
+    categories.forEach(c => {
+      select.innerHTML += `<option value="${c.categoryId}">${c.categoryTitle}</option>`;
+    });
+  });
+
+// submit product
+document.getElementById("productForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const nameEl = document.getElementById("name");
+  const priceEl = document.getElementById("price");
+  const stockEl = document.getElementById("stock");
+  const descEl = document.getElementById("description");
+  const categoryEl = document.getElementById("category");
+
+  fetch("/api/products", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: nameEl.value,
+      price: priceEl.value,
+      stock: stockEl.value,
+      description: descEl.value,
+      categoryId: categoryEl.value
+    })
+  }).then(() => {
+    window.location.href = "index.html";
+  });
+});
+</script>
+
+</body>
+</html>
