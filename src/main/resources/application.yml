@@ -1,4 +1,5 @@
 #file.upload-dir=uploads/products
+#http://localhost:8080/swagger-ui/index.html
 
 spring:
   datasource:
@@ -12,3 +13,4 @@ spring:
     properties:
       hibernate:
         format_sql: true	
+

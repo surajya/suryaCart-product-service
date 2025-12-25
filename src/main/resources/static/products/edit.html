@@ -8,39 +8,55 @@
 <h2>Edit Product</h2>
 
 <form id="editForm">
-  <input id="name" /><br>
-  <input id="price" type="number" /><br>
-  <input id="stock" type="number" /><br>
-  <input id="active" /><br>
+  <input id="name" placeholder="Name" /><br>
+  <input id="price" type="number" placeholder="Price" /><br>
+  <input id="stock" type="number" placeholder="Stock" /><br>
+  <input id="active" placeholder="Active (true/false)" /><br>
+  <input id="description" placeholder="description" /><br>
 
   <select id="category"></select><br><br>
 
-  <button>Update</button>
+  <button type="submit">Update</button>
 </form>
 
 <script>
 const id = new URLSearchParams(window.location.search).get("id");
 
+const nameInput = document.getElementById("name");
+const priceInput = document.getElementById("price");
+const stockInput = document.getElementById("stock");
+const activeInput = document.getElementById("active");
+const descriptionInput = document.getElementById("description");
+const categorySelect = document.getElementById("category");
+
 // 1️⃣ Load categories first
 fetch("/api/categories")
   .then(res => res.json())
   .then(categories => {
-    const select = document.getElementById("category");
     categories.forEach(c => {
-      select.innerHTML += `<option value="${c.categoryId}">${c.categoryTitle}</option>`;
+      categorySelect.innerHTML += `<option value="${c.categoryId}">${c.categoryTitle}</option>`;
     });
 
-    // 2️⃣ Load product after categories
+    // 2️⃣ Then load product
     return fetch(`/api/products/${id}`);
   })
   .then(res => res.json())
   .then(p => {
-    name.value = p.name;
-    price.value = p.price;
-    category.value = p.category_id; // 🔥 preselect
-  });
+  nameInput.value = p.name;
+  priceInput.value = p.price;
+  stockInput.value = p.stock;
+  activeInput.value = p.active;
+  descriptionInput.value = p.description;
 
-// update product
+  if (p.categoryId) {
+    categorySelect.value = p.categoryId;
+  } else if (p.category && p.category.categoryId) {
+    categorySelect.value = p.category.categoryId;
+  }
+});
+
+
+// 3️⃣ Update product
 document.getElementById("editForm").addEventListener("submit", e => {
   e.preventDefault();
 
@@ -48,9 +64,12 @@ document.getElementById("editForm").addEventListener("submit", e => {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      name: name.value,
-      price: price.value,
-      categoryId: category.value
+      name: nameInput.value,
+      price: priceInput.value,
+      stock: stockInput.value,
+      active: activeInput.value,
+      categoryId: categorySelect.value,
+      description: descriptionInput.value
     })
   }).then(() => {
     window.location.href = "index.html";
