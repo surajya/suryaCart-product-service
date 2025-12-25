@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Products</title>
+<title>Products</title>
 </head>
 <body>
+	<h2>Products</h2>
+	<a href="create.html">Add Product</a>
 
-<h2>Products</h2>
-<a href="create.html">Add Product</a>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Category</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody id="productTable"></tbody>
+	</table>
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Category</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody id="productTable"></tbody>
-</table>
-
-<script>
+	<script>
 function loadProducts() {
   fetch("/api/products")
     .then(res => res.json())

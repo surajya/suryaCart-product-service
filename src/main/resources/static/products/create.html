@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Add Product</title>
+<title>Add Product</title>
 </head>
 <body>
 
-<h2>Add Product</h2>
+	<h2>Add Product</h2>
 
-<form id="productForm">
-  <input id="name" placeholder="Product Name" /><br>
-  <input id="price" type="number" placeholder="Price" /><br>
-  <input id="stock" type="number" placeholder="stock" /><br>
-  <input id="description" placeholder="description" /><br>
-  
-  <label for="category">Category:</label>
-  <select id="category"></select><br><br>
+	<form id="productForm">
+		<label for="category">Category:</label> <select id="category"></select><br>
+		<br> <input id="name" placeholder="Product Name" /><br> <input
+			id="price" type="number" placeholder="Price" /><br> <input
+			id="stock" type="number" placeholder="stock" /><br> <input
+			id="description" placeholder="description" /><br>
 
-  <button type="submit">Save</button>
-</form>
+		<button type="submit">Save</button>
+	</form>
 
-<script>
+	<script>
 // load categories
 fetch("/api/categories")
   .then(res => res.json())
