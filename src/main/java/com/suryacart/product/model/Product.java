@@ -1,7 +1,6 @@
 package com.suryacart.product.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -10,13 +9,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -25,7 +23,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Product {
+@EqualsAndHashCode(callSuper = true)
+public class Product extends BaseEntity {
 
 	@Id
 	@GeneratedValue
@@ -50,17 +49,4 @@ public class Product {
 	@Column(nullable = false)
 	private Boolean active = true;
 
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
-
-	@PrePersist
-	void onCreate() {
-		this.createdAt = LocalDateTime.now();
-		this.updatedAt = LocalDateTime.now();
-	}
-
-	@PreUpdate
-	void onUpdate() {
-		this.updatedAt = LocalDateTime.now();
-	}
 }
